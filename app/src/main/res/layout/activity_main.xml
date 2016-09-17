@@ -10,16 +10,22 @@
         android:layout_height="wrap_content"
         android:dividerHeight="10px"
         android:headerDividersEnabled="false"
-        android:listSelector="@drawable/background">
+        android:layout_alignRight="@+id/button"
+        android:layout_alignBottom="@+id/button">
     </ListView>
     <Button
-        android:layout_width="48dp"
+        android:layout_width="100dp"
         android:layout_height="31dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:background="@drawable/bar"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:id="@+id/button"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="SEPTEMBER"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/button"/>
 </RelativeLayout>
