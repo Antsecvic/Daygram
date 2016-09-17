@@ -16,6 +16,9 @@ public class MainActivity extends Activity {
         getDate();
     }
 
+    /*
+    *获取系统时间
+     */
     public void getDate() {
         TextView editDate;
         int year;
