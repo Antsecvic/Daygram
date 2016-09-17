@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
     }
 
     /*
-    *获取系统时间
+    *获取系统时间，并将日期进行格式转换
      */
     public void getDate() {
         TextView editDate;
