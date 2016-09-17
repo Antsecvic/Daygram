@@ -14,5 +14,6 @@
         android:layout_marginLeft="58dp"
         android:layout_marginRight="25dp"
         android:textSize="16dp"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:onClick="edit"/>
 </RelativeLayout>
