@@ -1,54 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f2f1ed">
-    <ListView
-        android:id="@+id/lv"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#f2f1ed">
+    <EditText
         android:layout_width="match_parent"
-        android:divider="#00000000"
-        android:dividerHeight="0dp"
-        android:layout_height="560dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/preview">
-    </ListView>
+        android:layout_height="match_parent"
+        android:id="@+id/previewText"
+        android:typeface="serif"
+        android:gravity="start"
+        android:textStyle="bold"
+        android:layout_above="@+id/backToMain"/>
     <Button
         android:layout_width="100dp"
         android:layout_height="31dp"
         android:background="@drawable/bar"
-        android:id="@+id/preview"
+        android:id="@+id/backToMain"
         android:clickable="true"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/add"
         android:layout_marginStart="27dp"/>
-    <Spinner
+    <Button
         android:id="@+id/chooseyear"
         android:layout_width="80dp"
         android:layout_height="33dp"
         android:text="2016"
-        android:gravity="left"
         android:background="#00000000"
         android:typeface="serif"
         android:textStyle="bold"
         android:layout_alignBottom="@+id/choosemonth"
         android:layout_toEndOf="@+id/choosemonth"
         android:layout_alignTop="@+id/choosemonth"/>
-    <Spinner
+    <Button
         android:layout_width="110dp"
         android:layout_height="33dp"
         android:typeface="serif"
-        android:gravity="right"
         android:text="SEPTEMBER"
         android:textStyle="bold"
         android:id="@+id/choosemonth"
         android:background="#00000000"
+        android:spinnerMode="dropdown"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/add"
-        android:spinnerMode="dropdown"/>
+        android:layout_alignParentStart="true"/>
     <Button
         android:id="@+id/add"
         android:layout_width="40dp"
@@ -56,5 +49,6 @@
         android:background="@drawable/add"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/chooseyear"
-        android:layout_below="@+id/lv"/>
+        android:layout_alignTop="@+id/backToMain"/>
+
 </RelativeLayout>

@@ -10,9 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,20 +36,41 @@ public class MainActivity extends Activity {
     ListView lv;
     Button add;
     TextView dayinweek;
+    Button preview;
+    Button backToMain;
+    EditText previewText;
     ArrayList<Item> mylist;
     //定义一个startActivityForResult（）方法用到的整型值
     private final int RequestCode = 1500;
     String rs;  //用来存放edit_activity回传的值
     int rp; //用来存放当前点击item的position
     String[] tempStr;
+    Spinner chooseMonth;
+    Spinner chooseYear;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        ABAdapter abAdapter;
+        final ABAdapter abAdapter;
+        String[] month = new String[]{"JANUARY","FEBRUARY","MARCH","APRIL","MAY"
+                ,"JUNE","JULY","AUGUST","SPETEMBER","OCTOBER","NOVERBER","DECEMBER"};
+        String[] year = new String[]{"2011","2012","2013","2014","2015","2016"};
+
+        chooseMonth = (Spinner) findViewById(R.id.choosemonth);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,month);
+        chooseMonth.setAdapter(adapter1);
+        chooseMonth.setSelection(8);
+
+        chooseYear = (Spinner) findViewById(R.id.chooseyear);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,year);
+        chooseYear.setAdapter(adapter2);
+        chooseYear.setSelection(5);
 
         try{
             tempStr = (String[]) getObject("diary.dat");
@@ -101,7 +124,7 @@ public class MainActivity extends Activity {
                 String wd = "2016-09-" + Integer.toString(i + 1);
                 String WEEKDAY = getWeek(wd);
                 bundle.putSerializable("weekday", WEEKDAY);
-                bundle.putSerializable("diary",tempStr[i+1]);
+                bundle.putSerializable("diary", tempStr[i + 1]);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, RequestCode);
             }
@@ -119,9 +142,48 @@ public class MainActivity extends Activity {
                 String wd = "2016-09-" + Integer.toString(c.get(Calendar.DAY_OF_MONTH));
                 String WEEKDAY = getWeek(wd);
                 bundle.putSerializable("weekday", WEEKDAY);
-                bundle.putSerializable("diary",tempStr[c.get(Calendar.DAY_OF_MONTH)]);
+                bundle.putSerializable("diary", tempStr[c.get(Calendar.DAY_OF_MONTH)]);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, RequestCode);
+            }
+        });
+
+        preview = (Button) findViewById(R.id.preview);
+        preview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setContentView(R.layout.preview_page);
+                for(int i = 1;i <= 30;i++){
+                    if(tempStr[i] != null){
+                        String wd = "2016-09-" + Integer.toString(i);
+                        String weekday = getWeek(wd);
+                        if (weekday.equals("Mon"))
+                            weekday = "Monday";
+                        if (weekday.equals("Tue"))
+                            weekday = "Tuesday";
+                        if (weekday.equals("Wed"))
+                            weekday = "Wednesday";
+                        if (weekday.equals("Thu"))
+                            weekday = "Thursday";
+                        if (weekday.equals("Fri"))
+                            weekday = "Friday";
+                        if (weekday.equals("Sat"))
+                            weekday = "Saturday";
+                        if (weekday.equals("Sun")) {
+                            weekday = "Sunday";
+                        }
+                        previewText = (EditText) findViewById(R.id.previewText);
+                        previewText.append(Integer.toString(i) + "/" + weekday + "/" + tempStr[i]
+                        + "\n\n");
+                    }
+                }
+                backToMain = (Button) findViewById(R.id.backToMain);
+                backToMain.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                      onCreate(savedInstanceState);
+                    }
+                });
             }
         });
     }
@@ -338,6 +400,3 @@ public class MainActivity extends Activity {
         return null;
     }
 }
-
-
-
