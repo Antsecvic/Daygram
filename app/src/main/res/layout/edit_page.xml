@@ -5,23 +5,56 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/editbackground">
     <TextView
-        android:id="@+id/editDate"
-        android:layout_width="match_parent"
+        android:layout_width="105dp"
         android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
+        android:typeface="serif"
+        android:id="@+id/editWeek"
+        android:layout_marginLeft="10dp"
+        android:textSize="16dp"
+        android:gravity="bottom|right"
+        android:text="WEDNESDAY"
+        android:layout_alignTop="@+id/editDate"
+        android:layout_alignStart="@+id/addTime"/>
+    <TextView
+        android:id="@+id/editDate"
+        android:layout_width="228dp"
+        android:typeface="serif"
+        android:layout_height="30dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="58dp"
+        android:layout_marginLeft="133dp"
         android:layout_marginRight="25dp"
         android:textSize="16dp"
-        android:layout_centerVertical="true"
-        android:onClick="edit"/>
+        android:gravity="left|bottom"
+        android:onClick="edit"
+        android:textColor="#000000"/>
     <EditText
         android:layout_width="1000dp"
         android:layout_height="match_parent"
         android:layout_marginTop="80dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:editable="true"
-        android:layout_alignParentStart="true"/>
+        android:typeface="serif"
+        android:gravity="top"
+        android:layout_alignParentStart="true"
+        android:id="@+id/editText"/>
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/clock"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/addTime"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignStart="@+id/editText"/>
+    <Button
+        android:id="@+id/done"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:background="@drawable/done"
+        android:layout_alignTop="@+id/addTime"
+        android:layout_alignEnd="@+id/editDate"/>
 </RelativeLayout>

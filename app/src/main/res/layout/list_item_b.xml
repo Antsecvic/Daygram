@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingTop="5dp"
+                >
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/background"/>
+
+    <TextView
+        android:id="@+id/weekday"
+        android:layout_width="45dp"
+        android:layout_height="20dp"
+        android:layout_alignLeft="@id/background"
+        android:typeface="serif"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="SUN"
+        android:textSize="10dp"/>
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="45dp"
+        android:layout_height="31dp"
+        android:layout_marginLeft="0dp"
+        android:typeface="serif"
+        android:gravity="center"
+        android:text="18"
+        android:layout_below="@+id/weekday"
+        android:layout_alignStart="@+id/weekday"/>
+
+    <TextView
+        android:id="@+id/diary"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@id/background"
+        android:typeface="serif"
+        android:layout_toEndOf="@+id/day"
+        android:layout_alignTop="@+id/weekday"
+        android:gravity="center"/>
+</RelativeLayout>
