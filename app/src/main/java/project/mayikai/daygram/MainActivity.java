@@ -2,11 +2,10 @@ package project.mayikai.daygram;
 
 import android.app.Activity;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -16,7 +15,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -27,8 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Objects;
+
 
 import project.mayikai.item.Item;
 
@@ -56,59 +55,58 @@ public class MainActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         final ABAdapter abAdapter;
-        String[] month = new String[]{"JANUARY","FEBRUARY","MARCH","APRIL","MAY"
-                ,"JUNE","JULY","AUGUST","SPETEMBER","OCTOBER","NOVERBER","DECEMBER"};
-        String[] year = new String[]{"2011","2012","2013","2014","2015","2016"};
+        String[] month = new String[]{"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY"
+                , "JUNE", "JULY", "AUGUST", "SPETEMBER", "OCTOBER", "NOVERBER", "DECEMBER"};
+        String[] year = new String[]{"2011", "2012", "2013", "2014", "2015", "2016"};
 
         chooseMonth = (Spinner) findViewById(R.id.choosemonth);
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,month);
+                android.R.layout.simple_spinner_item, month);
         chooseMonth.setAdapter(adapter1);
         chooseMonth.setSelection(8);
 
         chooseYear = (Spinner) findViewById(R.id.chooseyear);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,year);
+                android.R.layout.simple_spinner_item, year);
         chooseYear.setAdapter(adapter2);
         chooseYear.setSelection(5);
 
-        try{
+        try {
             tempStr = (String[]) getObject("diary.dat");
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
 
-        if(tempStr == null){
+        if (tempStr == null) {
             tempStr = new String[31];
-            try{
+            try {
                 for (int i = 1; i <= 30; i++) {
                     tempStr[i] = null;
                 }
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 e.printStackTrace();
             }
         }
 
-        try {
+       /* try {
             mylist = (ArrayList<Item>) getObject("object.dat");
         } catch (NullPointerException e) {
             e.printStackTrace();
-            Toast toast=Toast.makeText(getApplicationContext(), "默认的Toast", Toast.LENGTH_SHORT);
-            //显示toast信息
-            toast.show();
         }
         if (null == mylist) {
             mylist = new ArrayList<Item>();
-            //初始化页面，创立30个空的item
-            for (int i = 1; i <= 30; i++) {
-                Item item1 = new Item();
-                item1.setDay(Integer.toString(i));
-                String temp = "2016-09-" + Integer.toString(i);
-                String week = getWeek(temp);
-                item1.setWeekday(week);
-                item1.setDiary(tempStr[i]);
-                mylist.add(item1);
-            }
+        }*/
+
+        mylist = new ArrayList<Item>();
+        //初始化页面，创立30个item
+        for (int i = 1; i <= 30; i++) {
+            Item item1 = new Item();
+            item1.setDay(Integer.toString(i));
+            String temp = "2016-09-" + Integer.toString(i);
+            String week = getWeek(temp);
+            item1.setWeekday(week);
+            item1.setDiary(tempStr[i]);
+            mylist.add(item1);
         }
         //实现点击item进行跳转功能，并将当前日期传给edit_activity
         lv = (ListView) findViewById(R.id.lv);
@@ -148,13 +146,48 @@ public class MainActivity extends Activity {
             }
         });
 
+         /*
+         *实现长按删除功能
+         */
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {
+                //定义AlertDialog.Builder对象，当长按列表项的时候弹出确认删除对话框
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("是否确定删除");
+                builder.setTitle("提示");
+
+                //添加AlertDialog.Builder对象的setPositiveButton()方法
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        tempStr[position + 1] = null;
+                        saveStr("diary.dat");
+                        onCreate(savedInstanceState);
+                    }
+                });
+
+                //添加AlertDialog.Builder对象的setNegativeButton()的方法
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.create().show();
+                return false;
+            }
+        });
+
+
+
         preview = (Button) findViewById(R.id.preview);
         preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setContentView(R.layout.preview_page);
-                for(int i = 1;i <= 30;i++){
-                    if(tempStr[i] != null){
+                for (int i = 1; i <= 30; i++) {
+                    if (tempStr[i] != null) {
                         String wd = "2016-09-" + Integer.toString(i);
                         String weekday = getWeek(wd);
                         if (weekday.equals("Mon"))
@@ -174,20 +207,19 @@ public class MainActivity extends Activity {
                         }
                         previewText = (EditText) findViewById(R.id.previewText);
                         previewText.append(Integer.toString(i) + "/" + weekday + "/" + tempStr[i]
-                        + "\n\n");
+                                + "\n\n");
                     }
                 }
                 backToMain = (Button) findViewById(R.id.backToMain);
                 backToMain.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                      onCreate(savedInstanceState);
+                        onCreate(savedInstanceState);
                     }
                 });
             }
         });
     }
-
 
 
     /**
@@ -218,7 +250,7 @@ public class MainActivity extends Activity {
                 String wd = "2016-09-" + Integer.toString(c.get(Calendar.DAY_OF_MONTH));
                 String WEEKDAY = getWeek(wd);
                 bundle.putSerializable("weekday", WEEKDAY);
-                bundle.putSerializable("diary",tempStr[c.get(Calendar.DAY_OF_MONTH)]);
+                bundle.putSerializable("diary", tempStr[c.get(Calendar.DAY_OF_MONTH)]);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, RequestCode);
             }
@@ -230,7 +262,7 @@ public class MainActivity extends Activity {
             String week = getWeek(temp);
             item2.setWeekday(week);
             if (i == rp) {
-                if(!rs.equals(""))
+                if (!rs.equals(""))
                     tempStr[i] = rs;
             }
             item2.setDiary(tempStr[i]);
