@@ -154,39 +154,7 @@ public class ABAdapter extends BaseAdapter {
         }
         return convertView;
     }
-
-/*
-    public class MyComparator implements Comparator {
-
-        public int compare(Object arg0, Object arg1) {
-            //根据不同的情况来进行排序
-
-            if (arg0 instanceof Item && arg1 instanceof Item) {
-
-                Item a = (Item) arg0;
-                Item b = (Item) arg1;
-                return Integer.valueOf(a.getImgResourceID()).compareTo(b.getDay());
-
-            } else if (arg0 instanceof Item && arg1 instanceof Item) {
-                Item b = (Item) arg0;
-                Item a = (Item) arg1;
-                return Integer.valueOf(b.getDay()).compareTo(Integer.valueOf(a.getImgResourceID()));
-
-            } else if (arg0 instanceof Item && arg1 instanceof Item) {
-
-                Item a0 = (Item) arg0;
-                Item a1 = (Item) arg1;
-                return Integer.valueOf(a0.getImgResourceID()).compareTo(Integer.valueOf(a1.getImgResourceID()));
-
-            } else {
-                Item b0 = (Item) arg0;
-                Item b1 = (Item) arg1;
-                return Integer.valueOf(b0.getDay()).compareTo(Integer.valueOf(b1.getDay()));
-            }
-        }
-    }
-*/
-
+    
     /**
      * item A 的Viewholder
      */
