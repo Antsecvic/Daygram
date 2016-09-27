@@ -154,7 +154,7 @@ public class ABAdapter extends BaseAdapter {
         }
         return convertView;
     }
-    
+
     /**
      * item A 的Viewholder
      */

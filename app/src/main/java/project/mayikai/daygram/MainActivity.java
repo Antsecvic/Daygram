@@ -259,7 +259,9 @@ public class MainActivity extends Activity {
                 });
 
 
-
+                /*
+                 *实现日记预览功能
+                 */
                 preview = (Button) findViewById(R.id.preview);
                 preview.setOnClickListener(new View.OnClickListener() {
                     @Override
