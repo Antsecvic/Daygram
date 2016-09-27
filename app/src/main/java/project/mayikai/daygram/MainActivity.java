@@ -343,7 +343,7 @@ public class MainActivity extends Activity {
             if(setDay <= max) {
                 Item item2 = new Item();
                 item2.setDay(Integer.toString(setDay));
-                String temp = Integer.toString(currentYear) + "-" + Integer.toString(thisMonth) + "-" + Integer.toString(i);
+                String temp = Integer.toString(currentYear) + "-" + Integer.toString(thisMonth) + "-" + Integer.toString(setDay);
                 String week = getWeek(temp);
                 item2.setWeekday(week);
                 if (i == (rp + (begin - 1))) {
