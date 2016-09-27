@@ -32,6 +32,10 @@ public class edit_activity extends Activity {
     Button addTime;
     EditText editText;
     Button done;
+    Calendar currentTime = Calendar.getInstance();
+    int currentMonth = currentTime.get(Calendar.MONTH) + 1;
+    int currentYear = currentTime.get(Calendar.YEAR);
+
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -47,6 +51,7 @@ public class edit_activity extends Activity {
         String weekday = bundle.getString("weekday");
         final String day = bundle.getString("day");
         String diary = bundle.getString("diary");
+        int thisMonth = bundle.getInt("thisMonth");
 
         try {
             if (weekday.equals("Mon"))
@@ -74,7 +79,7 @@ public class edit_activity extends Activity {
         } else {
             editWeek.setTextColor(Color.BLACK);
         }
-        String date = "/" + "SEPTEMBER" + " " + day + "/" + "2016";
+        String date = "/" + getMonth(thisMonth) + " " + day + "/" + Integer.toString(currentYear);
         editDate.setText(date);
         editText.setText(diary);
         /*Item s = (Item) getItem("Item.dat");
@@ -126,61 +131,33 @@ public class edit_activity extends Activity {
     /*
    *获取系统时间，并将日期进行格式转换
     */
-    public void getDate() {
-        TextView editDate;
-        int year;
-        int month;
-        int day;
-        int weekday;
-        editDate = (TextView) findViewById(R.id.editDate);
-        Calendar calendar = Calendar.getInstance();
-        String today = null;
-        String thisMonth = null;
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        weekday = calendar.get(Calendar.DAY_OF_WEEK);
-        if (weekday == 2) {
-            today = "MONDAY";
-        } else if (weekday == 3) {
-            today = "TUESDAY";
-        } else if (weekday == 4) {
-            today = "WEDNESDAY";
-        } else if (weekday == 5) {
-            today = "tHURSDAY";
-        } else if (weekday == 6) {
-            today = "FRIDAY";
-        } else if (weekday == 7) {
-            today = "SATURDAY";
-        } else {
-            today = "SUNDAY";
-        }
-        if (month + 1 == 1) {
+    public String getMonth(int month) {
+        String thisMonth;
+        if (month == 1) {
             thisMonth = "JANUARY";
-        } else if (month + 1 == 2) {
+        } else if (month == 2) {
             thisMonth = "FEBUARY";
-        } else if (month + 1 == 3) {
+        } else if (month == 3) {
             thisMonth = "MARCH";
-        } else if (month + 1 == 4) {
+        } else if (month == 4) {
             thisMonth = "APRIL";
-        } else if (month + 1 == 5) {
+        } else if (month == 5) {
             thisMonth = "MAY";
-        } else if (month + 1 == 6) {
+        } else if (month == 6) {
             thisMonth = "JUNE";
-        } else if (month + 1 == 7) {
+        } else if (month == 7) {
             thisMonth = "JULY";
-        } else if (month + 1 == 8) {
+        } else if (month == 8) {
             thisMonth = "AUGUST";
-        } else if (month + 1 == 9) {
+        } else if (month == 9) {
             thisMonth = "SEPTEMBER";
-        } else if (month + 1 == 10) {
+        } else if (month == 10) {
             thisMonth = "OCTOBER";
-        } else if (month + 1 == 11) {
+        } else if (month == 11) {
             thisMonth = "NOVEMBER";
         } else {
             thisMonth = "DECEMBER";
         }
-        String date = today + "/" + thisMonth + " " + day + "/" + year;
-        editDate.setText(date);
+        return thisMonth;
     }
 }

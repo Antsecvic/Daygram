@@ -21,23 +21,23 @@
         android:layout_toEndOf="@+id/add"
         android:layout_marginStart="27dp"/>
     <Button
-        android:id="@+id/chooseyear"
+        android:id="@+id/year"
         android:layout_width="80dp"
         android:layout_height="33dp"
         android:text="2016"
         android:background="#00000000"
         android:typeface="serif"
         android:textStyle="bold"
-        android:layout_alignBottom="@+id/choosemonth"
-        android:layout_toEndOf="@+id/choosemonth"
-        android:layout_alignTop="@+id/choosemonth"/>
+        android:layout_alignBottom="@+id/month"
+        android:layout_toEndOf="@+id/month"
+        android:layout_alignTop="@+id/month"/>
     <Button
         android:layout_width="110dp"
         android:layout_height="33dp"
         android:typeface="serif"
         android:text="SEPTEMBER"
         android:textStyle="bold"
-        android:id="@+id/choosemonth"
+        android:id="@+id/month"
         android:background="#00000000"
         android:spinnerMode="dropdown"
         android:layout_alignParentBottom="true"
@@ -48,7 +48,7 @@
         android:layout_height="40dp"
         android:background="@drawable/add"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/chooseyear"
+        android:layout_toEndOf="@+id/year"
         android:layout_alignTop="@+id/backToMain"/>
 
 </RelativeLayout>
