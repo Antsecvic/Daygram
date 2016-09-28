@@ -218,7 +218,7 @@ public class MainActivity extends Activity {
                         String wd = Integer.toString(currentYear) + "-" + Integer.toString(currentMonth) + "-" + Integer.toString(c.get(Calendar.DAY_OF_MONTH));
                         String WEEKDAY = getWeek(wd);
                         bundle.putSerializable("weekday", WEEKDAY);
-                        bundle.putSerializable("diary", tempStr[c.get(Calendar.DAY_OF_MONTH) + predays]);
+                        bundle.putSerializable("diary", tempStr[c.get(Calendar.DAY_OF_YEAR)]);
                         bundle.putSerializable("thisMonth",currentMonth);
                         intent.putExtras(bundle);
                         startActivityForResult(intent, RequestCode);
@@ -366,7 +366,7 @@ public class MainActivity extends Activity {
                 String wd = Integer.toString(currentYear) + "-" + Integer.toString(currentMonth) + "-" + Integer.toString(c.get(Calendar.DAY_OF_MONTH));
                 String WEEKDAY = getWeek(wd);
                 bundle.putSerializable("weekday", WEEKDAY);
-                bundle.putSerializable("diary", tempStr[c.get(Calendar.DAY_OF_MONTH)+ predays]);
+                bundle.putSerializable("diary", tempStr[c.get(Calendar.DAY_OF_YEAR)]);
                 bundle.putSerializable("thisMonth",currentMonth);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, RequestCode);
